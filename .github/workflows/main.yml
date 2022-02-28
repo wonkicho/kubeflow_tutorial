@@ -21,3 +21,7 @@ jobs:
       run: docker build ./boston_housing/preprocess_data --tag chowk1109/boston_pipeline_preprocessing
     - name: Push the Preprocess image
       run: docker push chowk1109/boston_pipeline_preprocessing
+    - name: Build the Train image
+      run: docker build ./boston_housing/train --tag chowk1109/boston_pipeline_train
+    - name: Push the Train image
+      run: docker push chowk1109/boston_pipeline_train
