@@ -18,7 +18,6 @@ jobs:
       run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
     - name: Build the Preprocess image
       run: docker build ./boston_housing/preprocess_data --tag chowk1109/boston_pipeline_preprocessing
-      run: docker build ./boston_housing/preprocess_data --tag chowk1109/boston_pipeline_preprocessing
     - name: Push the Preprocess image
       run: docker push chowk1109/boston_pipeline_preprocessing
     - name: Build the Train image
