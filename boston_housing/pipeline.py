@@ -41,8 +41,8 @@ def test_op(x_test, y_test, model):
             '--model', model
         ],
         file_outputs={
-            'mean_squared_error': '/app/output.txt',
-            'kubeflow-metrics' : '/app/kubeflow-metrics.json'
+            'mean_squared_error': '/output.txt',
+            'mlpipeline_metrics' : '/mlpipeline_metrics.json'
         }
     )
 
