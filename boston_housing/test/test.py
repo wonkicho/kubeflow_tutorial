@@ -21,7 +21,7 @@ def test_model(x_test, y_test, model_path):
         }]
     }
 
-    with open('kubeflow-metrics.json', 'w') as f:
+    with open('/kubeflow-metrics.json', 'w') as f:
         json.dump(metrics, f)
 
     with open('output.txt', 'a') as f:
