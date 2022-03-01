@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent
 def get_secret(
     key: str,
     default_value: Optional[str] = None,
-    json_path: str = str(BASE_DIR / "secrets.json"),
+    json_path: str = str(BASE_DIR / "kubeflow-pipeline-123-14f221bb4b4f.json"),
 ):
 
     with open(json_path) as f:
@@ -19,4 +19,4 @@ def get_secret(
     except KeyError:
         if default_value:
             return default_value
-        raise EnvironmentError(f"Set the {key} environment variable.")
+        raise EnvironmentError("Set the {} environment variable.".format(key))

@@ -16,7 +16,8 @@ def test_model(x_test, y_test, model_path):
     metrics = {
         'metrics' : [{
             'name' : 'mse score',
-            'numberValue' : err
+            'numberValue' : err,
+            'format' : 'RAW'
         }]
     }
 
