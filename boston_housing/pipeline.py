@@ -41,19 +41,12 @@ def test_op(x_test, y_test, model):
             '--model', model
         ],
         file_outputs={
-            'mean_squared_error': '/app/output.txt'
+            'mean_squared_error': '/app/output.txt',
+            'kubeflow-metrics' : '/app/kubeflow-metrics.json'
         }
     )
 
-def deploy_model_op(model):
 
-    return dsl.ContainerOp(
-        name='Deploy Model',
-        image='chowk1109/boston_pipeline_deploy_model:latest',
-        arguments=[
-            '--model', model
-        ]
-    )
 
 @dsl.pipeline(
    name='Boston Housing Pipeline',
@@ -72,17 +65,6 @@ def boston_pipeline():
         dsl.InputArgumentPath(_preprocess_op.outputs['y_test']),
         dsl.InputArgumentPath(_train_op.outputs['model'])
     ).after(_train_op)
-
-    deploy_model_op(
-        dsl.InputArgumentPath(_train_op.outputs['model'])
-    ).after(_test_op)
-
-@dsl.pipeline(
-   name='Boston Housing Pipeline',
-   description='An example pipeline that trains and logs a regression model.'
-)
-def boston_pipeline():
-    _preprocess_op = preprocess_op()
 
 pipeline_package_path = 'my_pipeline.zip'
 kfp.compiler.Compiler().compile(boston_pipeline, pipeline_package_path)

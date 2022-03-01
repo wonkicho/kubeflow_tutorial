@@ -1,6 +1,7 @@
 import argparse
 import joblib
 import numpy as np
+import json
 from sklearn.metrics import mean_squared_error
 
 def test_model(x_test, y_test, model_path):
@@ -12,9 +13,18 @@ def test_model(x_test, y_test, model_path):
 
     err = mean_squared_error(y_test_data, y_pred)
     
+    metrics = {
+        'metrics' : [{
+            'name' : 'mse score',
+            'numberValue' : err
+        }]
+    }
+
+    with open('/kubeflow-metrics.json', 'w') as f:
+        json.dump(metrics, f)
+
     with open('output.txt', 'a') as f:
         f.write(str(err))
-
 
 
 if __name__ == '__main__':
